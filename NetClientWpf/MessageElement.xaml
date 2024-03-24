@@ -11,7 +11,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="TextBlock_MessageSender" Grid.Row="0" Text="Sender Name" Padding="4,2" Margin="0,0,0,2" Background="White"/>
-        <TextBlock x:Name="TextBlock_MessageContent" Grid.Row="1" TextWrapping="Wrap" Text="Conent" Padding="4,2" Background="White"/>
+        <TextBlock x:Name="TextBlock_MessageSender" Grid.Row="0" Text="Sender Name" Padding="4,2" Margin="0,0,0,2" FontWeight="Bold" Foreground="#FF4A4A4A"/>
+        <TextBlock x:Name="TextBlock_MessageContent" Grid.Row="1" TextWrapping="Wrap" Text="Conent" Padding="4,2" Background="White" Foreground="#FF424242"/>
     </Grid>
 </UserControl>

@@ -40,23 +40,42 @@ namespace NetClientWpf
 		}
 
 		private void Client_OnMessage(Socket sender, NetworkMessage message) {
-            AddMessage(message);
+			if (message.Header == "Service") {
+				AddMessage(message, MessageType.Service);
+			}
+            else {
+				AddMessage(message, MessageType.Foreign);
+			}
 		}
 
-		public void AddMessage(NetworkMessage message, bool ownMessage = false) {
-			//SystenNetMessage
+		public enum MessageType {
+			Ours,
+			Foreign,
+			Service,
+		}
+		public void AddMessage(NetworkMessage message, MessageType type = MessageType.Ours) {
+			UserControl newControl;
 
-			MessageElement messageElement = new MessageElement(message);
-			if (ownMessage) {
-				messageElement.Margin = new Thickness(200, 4, 4, 0);
-				messageElement.HorizontalAlignment = HorizontalAlignment.Right;
-			}
-			else {
-				messageElement.Margin = new Thickness(4, 4, 200, 0);
-				messageElement.HorizontalAlignment = HorizontalAlignment.Left;
+			switch (type) {
+				case MessageType.Ours: {
+					newControl = new MessageElement(message);
+					newControl.Margin = new Thickness(200, 4, 4, 0);
+					newControl.HorizontalAlignment = HorizontalAlignment.Right;
+				} break;
+				case MessageType.Foreign: {
+					newControl = new MessageElement(message);
+					newControl.Margin = new Thickness(4, 4, 200, 0);
+					newControl.HorizontalAlignment = HorizontalAlignment.Left;
+				} break;
+				case MessageType.Service: {
+					newControl = new ServiceMessageElement(message);
+					newControl.Margin = new Thickness(160, 4, 160, 0);
+					newControl.HorizontalAlignment = HorizontalAlignment.Center;
+				} break;
+				default: return;
 			}
 
-			StackPanel_Dialog.Children.Add(messageElement);
+			StackPanel_Dialog.Children.Add(newControl);
 			ScrollViewer_Dialog.ScrollToBottom();
 		}
 
@@ -79,7 +98,7 @@ namespace NetClientWpf
 			TextBox_Message.Text = "";
 
 			await _client.SendMessage(message);
-			AddMessage(message, true);
+			AddMessage(message, MessageType.Ours);
 		}
 	}
 }

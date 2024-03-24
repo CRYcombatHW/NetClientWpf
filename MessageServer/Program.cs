@@ -19,7 +19,7 @@ namespace MessageServer
 				users.Add(newUser);
 
 				foreach (MessageUser user in users) {
-					await _server.SendMessage(user.Socket, new NetworkMessage("Server", $"New user \"{newUser.Name}\" connected"));
+					await _server.SendMessage(user.Socket, new NetworkMessage("Service", $"New user \"{newUser.Name}\" connected"));
 				}
 			};
 			_server.OnMessage += async (socket, message) => {
@@ -28,6 +28,25 @@ namespace MessageServer
 						message.Header = user.Name;
 
 						await _server.SendMessage(user.Socket, message);
+					}
+				}
+			};
+			_server.OnDisconnection += async (socket) => {
+				MessageUser? disconnectedUser = null;
+
+				foreach (MessageUser user in users) {
+					if (user.Socket.RemoteEndPoint == socket.RemoteEndPoint) {
+						disconnectedUser = user;
+						break;
+					}
+				}
+				if (disconnectedUser is null) {
+					return;
+				}
+
+				foreach (MessageUser user in users) {
+					if (disconnectedUser.Socket.RemoteEndPoint != user.Socket.RemoteEndPoint) {
+						await _server.SendMessage(user.Socket, new NetworkMessage("Service", $"New user \"{disconnectedUser.Name}\" disconnected"));
 					}
 				}
 			};
