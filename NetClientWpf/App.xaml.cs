@@ -1,4 +1,5 @@
-﻿using NetworkService;
+﻿using ClientLib;
+using NetworkService;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,7 +22,7 @@ namespace NetClientWpf
 				ConnectionWindow connectionWindow = new ConnectionWindow();
 				connectionWindow.ShowDialog();
 
-				Client? client = connectionWindow.Client;
+				NetworkClient? client = connectionWindow.Client;
 				if (client is null) {
 					Current.Shutdown();
 					return;

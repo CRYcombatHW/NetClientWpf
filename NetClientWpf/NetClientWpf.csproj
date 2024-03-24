@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClientLib\ClientLib.csproj" />
     <ProjectReference Include="..\NetworkService\NetworkService.csproj" />
   </ItemGroup>
 

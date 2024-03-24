@@ -1,4 +1,5 @@
-﻿using NetworkService;
+﻿using ClientLib;
+using NetworkService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace NetClientWpf
 	/// </summary>
 	public partial class ConnectionWindow : Window
 	{
-		public Client? Client { get; private set; }
+		public NetworkClient? Client { get; private set; }
 
 		public ConnectionWindow() {
 			Client = null;
@@ -57,8 +58,17 @@ namespace NetClientWpf
 				MessageBox.Show("Cant connect to that server");
 			}
 		}
+		private async void Button_ConnectToMessageServer_Click(object sender, RoutedEventArgs e) {
+            await Console.Out.WriteLineAsync("asdasdasd");
+            if (await TryCreateClient(ConfigurationManager.MessageServerEndpoint)) {
+				Close();
+			}
+			else {
+				MessageBox.Show("Cant connect to that server");
+			}
+		}
 		private async Task<bool> TryCreateClient(IPEndPoint endPoint) {
-			Client = new Client();
+			Client = new NetworkClient();
 			if (!await Client.TryConnectAsync(endPoint)) {
 				return false;
 			}

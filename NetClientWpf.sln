@@ -3,11 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetClientWpf", "NetClientWpf\NetClientWpf.csproj", "{ECDB9FAB-34F4-4ABC-82BB-3587BB4F07C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetClientWpf", "NetClientWpf\NetClientWpf.csproj", "{ECDB9FAB-34F4-4ABC-82BB-3587BB4F07C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkService", "NetworkService\NetworkService.csproj", "{7B2424F5-EE04-4DC2-BAFD-252EECFEA313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkService", "NetworkService\NetworkService.csproj", "{7B2424F5-EE04-4DC2-BAFD-252EECFEA313}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiddleServer", "RiddleServer\RiddleServer.csproj", "{84C1DFB2-BE93-4CC0-95AB-4416A00F800A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiddleServer", "RiddleServer\RiddleServer.csproj", "{84C1DFB2-BE93-4CC0-95AB-4416A00F800A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLib", "ServerLib\ServerLib.csproj", "{E615C697-91BE-41B2-86EE-136E1C2C23BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientLib", "ClientLib\ClientLib.csproj", "{1CFF0065-22E1-4CAE-912A-9C0FCD9F32BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiddleLib", "RiddleLib\RiddleLib.csproj", "{EB91839E-EAD3-4E5C-82DF-42D6EC4C8124}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageServer", "MessageServer\MessageServer.csproj", "{2569AF73-43CF-413D-BB8D-4AC321A516E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +35,22 @@ Global
 		{84C1DFB2-BE93-4CC0-95AB-4416A00F800A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84C1DFB2-BE93-4CC0-95AB-4416A00F800A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84C1DFB2-BE93-4CC0-95AB-4416A00F800A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E615C697-91BE-41B2-86EE-136E1C2C23BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E615C697-91BE-41B2-86EE-136E1C2C23BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E615C697-91BE-41B2-86EE-136E1C2C23BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E615C697-91BE-41B2-86EE-136E1C2C23BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CFF0065-22E1-4CAE-912A-9C0FCD9F32BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CFF0065-22E1-4CAE-912A-9C0FCD9F32BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CFF0065-22E1-4CAE-912A-9C0FCD9F32BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CFF0065-22E1-4CAE-912A-9C0FCD9F32BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB91839E-EAD3-4E5C-82DF-42D6EC4C8124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB91839E-EAD3-4E5C-82DF-42D6EC4C8124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB91839E-EAD3-4E5C-82DF-42D6EC4C8124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB91839E-EAD3-4E5C-82DF-42D6EC4C8124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2569AF73-43CF-413D-BB8D-4AC321A516E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2569AF73-43CF-413D-BB8D-4AC321A516E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2569AF73-43CF-413D-BB8D-4AC321A516E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2569AF73-43CF-413D-BB8D-4AC321A516E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

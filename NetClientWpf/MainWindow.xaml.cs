@@ -1,7 +1,9 @@
-﻿using NetworkService;
+﻿using ClientLib;
+using NetworkService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,27 +23,29 @@ namespace NetClientWpf
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private Client _client;
+		private NetworkClient _client;
 
-		public MainWindow(Client client) {
+		public MainWindow(NetworkClient client) {
 			_client = client;
 			_client.OnMessage += Client_OnMessage;
-			_client.OnDisconnect += Client_OnDisconnect;
+			_client.OnDisconnection += Client_OnDisconnection;
 
 			InitializeComponent();
 
-			Dispatcher.Invoke(_client.ListenMessages);
+			Dispatcher.Invoke(_client.Listen);
 		}
 
-		private void Client_OnDisconnect() {
+		private void Client_OnDisconnection(Socket sender) {
 			Close();
 		}
 
-		private void Client_OnMessage(NetworkMessage message) {
+		private void Client_OnMessage(Socket sender, NetworkMessage message) {
             AddMessage(message);
 		}
 
 		public void AddMessage(NetworkMessage message, bool ownMessage = false) {
+			//SystenNetMessage
+
 			MessageElement messageElement = new MessageElement(message);
 			if (ownMessage) {
 				messageElement.Margin = new Thickness(200, 4, 4, 0);
@@ -71,7 +75,7 @@ namespace NetClientWpf
 				return;
 			}
 
-			NetworkMessage message = new NetworkMessage("Client", TextBox_Message.Text);
+			NetworkMessage message = new NetworkMessage("You", TextBox_Message.Text);
 			TextBox_Message.Text = "";
 
 			await _client.SendMessage(message);

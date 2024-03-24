@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace RiddleServer
+namespace RiddleLib
 {
 	public static class RiddleApi
 	{

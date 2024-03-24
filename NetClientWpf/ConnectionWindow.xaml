@@ -14,7 +14,7 @@
         <Separator/>
         <StackPanel>
             <Button x:Name="Button_ConnectToRiddleServer" Content="Riddle server" Margin="0,0,0,4" Click="Button_ConnectToRiddleServer_Click"/>
-            <Button x:Name="Button_ConnectToMessageServer" Content="Message server" Margin="0,0,0,0"/>
+            <Button x:Name="Button_ConnectToMessageServer" Content="Message server" Margin="0,0,0,0" Click="Button_ConnectToMessageServer_Click"/>
         </StackPanel>
         <Separator/>
         <TextBlock Text="Custom Server" TextAlignment="Center"/>
