@@ -1,0 +1,39 @@
+﻿<Window x:Class="NetClientWpf.ConnectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetClientWpf"
+        mc:Ignorable="d"
+        SizeToContent="Height"
+        Title="Connect To Server" Height="auto" Width="320"
+        ResizeMode="NoResize">
+    <StackPanel Margin="4,4,4,4">
+        <Separator/>
+        <TextBlock Text="Default Servers" TextAlignment="Center"/>
+        <Separator/>
+        <StackPanel>
+            <Button x:Name="Button_ConnectToRiddleServer" Content="Riddle server" Margin="0,0,0,4" Click="Button_ConnectToRiddleServer_Click"/>
+            <Button x:Name="Button_ConnectToMessageServer" Content="Message server" Margin="0,0,0,0"/>
+        </StackPanel>
+        <Separator/>
+        <TextBlock Text="Custom Server" TextAlignment="Center"/>
+        <Separator/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Ip Address" Padding="4,2"/>
+            <TextBox x:Name="TextBox_Address" Grid.Row="1" Grid.Column="0" Margin="0,4"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Port" Padding="4,2"/>
+            <TextBox x:Name="TextBox_Port" Grid.Row="1" Grid.Column="1" Margin="4,4,0,4" Width="60"/>
+            <Button x:Name="Button_Connect" Grid.Row="2" Grid.ColumnSpan="2" Content="Connect" Click="Button_Connect_Click"/>
+        </Grid>
+    </StackPanel>
+</Window>
