@@ -2,56 +2,58 @@
 using System.Net;
 using System.Net.Sockets;
 using NetworkService;
+using System.Runtime.InteropServices;
 
 namespace MessageServer
 {
 	internal class Program
 	{
+		private static List<NetworkMessage> _chatHistory = new List<NetworkMessage>();
+
 		private static NetworkServer _server = new NetworkServer(ConfigurationManager.MessageServerEndpoint);
 
 		private static async Task Main(string[] args) {
 			Console.WriteLine("Staring message server");
 
-			List<MessageUser> users = new List<MessageUser>();
+			List<Socket> users = new List<Socket>();
 
 			_server.OnConnection += async (socket) => {
-				MessageUser newUser = new MessageUser(socket, $"User {users.Count + 1}");
-				users.Add(newUser);
+       
+				users.Add(socket);
 
-				foreach (MessageUser user in users) {
-					await _server.SendMessage(user.Socket, new NetworkMessage("Service", $"New user \"{newUser.Name}\" connected"));
+				foreach (Socket user in users) {
+					await _server.SendMessage(user, new NetworkMessage("Service", $"New user connected"));
 				}
 			};
 			_server.OnMessage += async (socket, message) => {
-				foreach (MessageUser user in users) {
-					if (user.Socket.RemoteEndPoint != socket.RemoteEndPoint) {
-						message.Header = user.Name;
-
-						await _server.SendMessage(user.Socket, message);
+				_chatHistory.Add(message);
+				foreach (Socket user in users) {
+					if (user.RemoteEndPoint != socket.RemoteEndPoint) {
+						await _server.SendMessage(user, message);
 					}
 				}
 			};
-			_server.OnDisconnection += async (socket) => {
-				MessageUser? disconnectedUser = null;
+			_server.OnDisconnection += async (socket) =>
+			{
+                Socket? disconnectedUser = null;
 
-				foreach (MessageUser user in users) {
-					if (user.Socket.RemoteEndPoint == socket.RemoteEndPoint) {
-						disconnectedUser = user;
-						break;
-					}
-				}
-				if (disconnectedUser is null) {
+				disconnectedUser = users.FirstOrDefault(u => u.RemoteEndPoint == socket.RemoteEndPoint);
+
+				if (disconnectedUser is null)
+				{
 					return;
 				}
-
-				foreach (MessageUser user in users) {
-					if (disconnectedUser.Socket.RemoteEndPoint != user.Socket.RemoteEndPoint) {
-						await _server.SendMessage(user.Socket, new NetworkMessage("Service", $"New user \"{disconnectedUser.Name}\" disconnected"));
-					}
+				users.Remove(disconnectedUser);
+				_chatHistory.Add(new NetworkMessage("Service", $"User disconnected"));
+                foreach (Socket user in users)
+				{
+                    await _server.SendMessage(user, new NetworkMessage("Service", $"User disconnected"));
 				}
 			};
 
 			await _server.AcceptClientsAsync();
+
+		
 		}
 	}
 }
