@@ -24,6 +24,10 @@ namespace NetClientWpf
 	public partial class MainWindow : Window
 	{
 		private NetworkClient _client;
+		
+		private string _name;
+
+		
 
 		public MainWindow(NetworkClient client) {
 			_client = client;
@@ -32,6 +36,7 @@ namespace NetClientWpf
 
 			InitializeComponent();
 
+			_name = $"Guest{new Random().Next(1000, 10000)}";
 			Dispatcher.Invoke(_client.Listen);
 		}
 
@@ -94,7 +99,15 @@ namespace NetClientWpf
 				return;
 			}
 
-			NetworkMessage message = new NetworkMessage("You", TextBox_Message.Text);
+			if(TextBox_Message.Text.Length > 12 && TextBox_Message.Text.StartsWith("!changename "))
+			{ 
+				_name = TextBox_Message.Text.Substring(12);
+                AddMessage(new NetworkMessage("", $"Your nickname was changed to {_name}"), MessageType.Service);
+
+                TextBox_Message.Text = "";
+                return;
+			}
+			NetworkMessage message = new NetworkMessage(_name, TextBox_Message.Text);
 			TextBox_Message.Text = "";
 
 			await _client.SendMessage(message);

@@ -15,6 +15,7 @@ namespace MessageServer
 		public MessageUser(Socket socket, string name) {
 			Socket = socket;
 			Name = name;
+			
 		}
 	}
 }

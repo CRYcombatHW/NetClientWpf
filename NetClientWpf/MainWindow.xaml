@@ -8,7 +8,8 @@
 		Title="MainWindow"
         Height="450" Width="800"
 		MinHeight="200" MinWidth="400"
-		Background="#FFE6E6E6">
+		Background="#FFE6E6E6"
+        >
 	<Grid Margin="4">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>

@@ -18,18 +18,24 @@ namespace NetClientWpf
 	public partial class App : Application
 	{
 		private void Application_Startup(object sender, StartupEventArgs e) {
-			while (true) {
-				ConnectionWindow connectionWindow = new ConnectionWindow();
+            NetworkClient? client;
+            ConnectionWindow connectionWindow;
+
+            while (true) {
+				connectionWindow = new ConnectionWindow();
+                client = null;
 				connectionWindow.ShowDialog();
 
-				NetworkClient? client = connectionWindow.Client;
-				if (client is null) {
+				client = connectionWindow.Client;
+                if (client is null) {
 					Current.Shutdown();
 					return;
 				}
 
 				MainWindow = new MainWindow(client);
 				MainWindow.ShowDialog();
+				
+				client.Disconnect();
 			}
 		}
 
