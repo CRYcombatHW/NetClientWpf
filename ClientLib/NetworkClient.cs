@@ -21,5 +21,10 @@ namespace ClientLib
 
 		public async Task SendMessage(NetworkMessage message)
 			=> await SendMessage(_socket, message);
+
+		public void Disconnect()
+		{
+			_socket.Close();
+		}
 	}
 }

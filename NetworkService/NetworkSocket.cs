@@ -21,6 +21,9 @@ namespace NetworkService
 			_socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 		}
 
+
+
+
 		public async Task ListenSocket(Socket socket) {
 			OnConnection?.Invoke(socket);
 

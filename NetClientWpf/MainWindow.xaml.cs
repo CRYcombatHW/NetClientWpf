@@ -25,8 +25,9 @@ namespace NetClientWpf
 	{
 		private NetworkClient _client;
 		
-		private string _name; 
+		private string _name;
 
+		
 
 		public MainWindow(NetworkClient client) {
 			_client = client;
